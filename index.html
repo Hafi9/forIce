@@ -13,7 +13,7 @@
       --r:22px;
     }
     *{box-sizing:border-box}
-    html,body{height:100%; margin:0; padding:0; overflow-x:hidden;}
+    html,body{height:100%; margin:0; padding:0; overflow-x:hidden; overflow-y:auto;}
 
     body{
       color:var(--ink); 
@@ -22,7 +22,6 @@
         radial-gradient(1200px 800px at 80% 0%, #e6f4ff, transparent),
         linear-gradient(135deg, var(--bg1), #ffffff);
       background-attachment:fixed;
-      overflow:hidden;
       position: relative;
     }
 
@@ -55,6 +54,7 @@
       padding: clamp(18px, 4vw, 36px);
       opacity:0; transform: translateX(40px) scale(.98); 
       transition: opacity .5s ease, transform .6s cubic-bezier(.2,.8,.2,1);
+      touch-action: pan-y pinch-zoom;
     }
     .slide.active{
       opacity:1; transform:none; z-index:2
@@ -258,6 +258,8 @@
         { type:'text', title:'Hai…', body:'Aku bikin halaman kecil ini untuk menyampaikan sesuatu dengan pelan dan jujur. Bacanya santai ya; aku nggak mau bikin siapa pun merasa berat.' },
         { type:'text', title:'Aku benar‑benar menyesal', body:'Aku sadar sikap dan kata‑kataku sempat melukai kamu. Maafkan aku. Tanpa pembenaran, tanpa memaksa apa pun—aku menyesal, dan aku belajar dari ini.' },
         { type:'photo', body:'Terima kasih sudah jadi bagian dari banyak hal baik. Aku menghargai kamu, selalu.', photoIndex: 0 },
+        { type:'photo', body:'Setiap tawa kita, aku simpan dalam hati.', photoIndex: 1 },
+        { type:'photo', body:'Aku takkan lupa bagaimana kamu membuatku tersenyum.', photoIndex: 2 },
         { type:'text', title:'Tentang kepercayaan', body:'Aku paham kepercayaan itu nggak bisa diminta. Yang bisa kulakukan hanya memperbaiki diri dan menunjukkan lewat tindakan yang konsisten—tanpa banyak janji.' },
         { type:'final', title:'Terima kasih sudah membaca', body:'Kalau suatu saat kamu ingin ngobrol, aku siap mendengar. Kalau belum, tidak apa‑apa—aku tetap menghargai ruangmu.' }
       ]
@@ -363,7 +365,7 @@
           const pol = el('div', { class: 'polaroid' });
           pol.appendChild(el('div', { class: 'tape' }));
 
-          const src = CONFIG.photos[s.photoIndex ?? 0] || CONFIG.photos[0];
+          const src = CONFIG.photos[s.photoIndex] || CONFIG.photos[0];
           const img = el('img', { src, alt: 'Foto' });
           img.onerror = () => {
             img.src = 'https://via.placeholder.com/300x400?text=Foto+Tidak+Ditemukan';
